@@ -1,4 +1,4 @@
-let url = window.location.toString();
+let url =  window.location.toString();
 
 let getUserName = (url) => {
   let getName = url.split("=");
@@ -10,8 +10,6 @@ let getUserName = (url) => {
 }
 
 let logName = getUserName(url);
-console.log(logName);
-
 fetch(`https://api.github.com/users/${logName}`)
   .then(res => res.json())
   .then(json => {
@@ -19,16 +17,13 @@ fetch(`https://api.github.com/users/${logName}`)
     name = json.name;
     bio = json.bio;
     url = json.url;
-
     let modifyName = () => {
       let userName = document.getElementsByTagName("h1");
       userName[0].innerHTML = name;
     }
-
     let modifyBio = () => {
       let userBio = document.getElementById("bio");
       userBio.innerHTML = bio;
-      
     }
     let modifyAvatar = () => {
       let userAvatar = document.getElementsByTagName("img");
@@ -38,15 +33,13 @@ fetch(`https://api.github.com/users/${logName}`)
     let modifyUrl = () => {
       let userUrl = document.getElementById("url");
       userUrl.href = `https://github.com/${logName}`;
-      
-      
     }
     modifyName();
     modifyBio();
     modifyAvatar();
     modifyUrl();
   })
-  .catch(err => document.write("Информация о пользователе не доступна"));
+  .catch(err => document.write(err + "Информация о пользователе не доступна"));
 
   
  
