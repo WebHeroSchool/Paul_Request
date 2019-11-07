@@ -1,5 +1,4 @@
-let url =  https://api.github.com/users=праороапроапж;
-
+let url = window.location.toString();
 let getUserName = (url) => {
   let getName = url.split("=");
   let logName = getName[1];  
@@ -17,7 +16,10 @@ fetch(`https://api.github.com/users/${logName}`)
     name = json.name;
     bio = json.bio;
     url = json.url;
-    if (name) {
+
+    if (name == undefined) {
+      alert("Профиль не найден");
+    } else {
       let modifyName = () => {
         let userName = document.getElementsByTagName("h1");
         userName[0].innerHTML = name;
@@ -39,12 +41,11 @@ fetch(`https://api.github.com/users/${logName}`)
       modifyBio();
       modifyAvatar();
       modifyUrl();
-    } else {
-      alert("Профиль не найден");
-    }
     
+    }
+
   })
-  .catch(err => document.write(err + "Информация о пользователе не доступна"));
+  .catch(err => alert(err + "Информация о пользователе не доступна"));
 
   
  
